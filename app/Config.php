@@ -55,7 +55,7 @@ class Config
     {
         $platforms = [Platform::IOS => 'apns', Platform::ANDROID => 'gcm'];
         $map = static::get('map');
-        if (in_array($platform, $platforms) && ($configId = isset($map[$platforms[$platform]][$bundleId]) ? $map[$platforms[$platform]][$bundleId] : (isset($map[$platforms[$platform]]['*']) ? $map[$platforms[$platform]]['*'] : null)) !== null) {
+        if (in_array($platform, array_keys($platforms)) && ($configId = isset($map[$platforms[$platform]][$bundleId]) ? $map[$platforms[$platform]][$bundleId] : (isset($map[$platforms[$platform]]['*']) ? $map[$platforms[$platform]]['*'] : null)) !== null) {
             return static::get($platforms[$platform])[$configId];
         }
         return [];
