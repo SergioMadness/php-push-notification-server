@@ -107,7 +107,7 @@ RUN php -r "unlink('composer-setup.php');"
 COPY ./ /usr/src/pusher
 WORKDIR /usr/src/pusher
 
-VOLUME ["/usr/src/pusher/certificates", "/usr/src/pusher/config.json"]
+VOLUME ["/usr/src/pusher/certificates"]
 
 RUN composer install --no-dev
 
