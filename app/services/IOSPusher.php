@@ -8,6 +8,8 @@ use Pushok\Payload\Alert;
 use professionalweb\Config;
 use Pushok\AuthProvider\Token;
 use Pushok\ApnsResponseInterface;
+use Pushok\AuthProviderInterface;
+use professionalweb\contracts\Platform;
 use professionalweb\models\PushResponse;
 use professionalweb\contracts\PushNotification;
 
@@ -32,14 +34,8 @@ class IOSPusher implements PushNotification
     {
         $result = [];
 
-        $apnsConfig = Config::get('apns');
-        $authProvider = Token::create([
-            'key_id' => $apnsConfig['keyId'],
-            'team_id' => $apnsConfig['teamId'],
-            'app_bundle_id' => $bundleId,
-            'private_key_path' => $apnsConfig['key'],
-            'private_key_secret' => empty($apnsConfig['keyPassword']) ? null : $apnsConfig['keyPassword'],
-        ]);
+        $apnsConfig = Config::getConfigByBundleId(Platform::IOS, $bundleId);
+        $authProvider = $this->createToken($bundleId, $apnsConfig);
 
         $alert = Alert::create();
         if (!empty($title)) {
@@ -72,10 +68,28 @@ class IOSPusher implements PushNotification
             /** @var ApnsResponseInterface $response */
             $result[] = (new PushResponse())
                 ->setToken($tokenUIDMap[trim($response->getApnsId())])
-                ->setStatusCode($response->getStatusCode())
+                ->setStatusCode((string)$response->getStatusCode())
                 ->setMessage($response->getStatusCode() === 0 ? $response->getReasonPhrase() : $response->getErrorReason() . PHP_EOL . $response->getErrorDescription());
         }
 
         return $result;
+    }
+
+    /**
+     *
+     *
+     * @param string $bundleId
+     * @param array $config
+     * @return AuthProviderInterface
+     */
+    protected function createToken(string $bundleId, array $config) : AuthProviderInterface
+    {
+        return Token::create([
+            'key_id' => $config['keyId'],
+            'team_id' => $config['teamId'],
+            'app_bundle_id' => $bundleId,
+            'private_key_path' => $config['key'],
+            'private_key_secret' => empty($config['keyPassword']) ? null : $config['keyPassword'],
+        ]);
     }
 }

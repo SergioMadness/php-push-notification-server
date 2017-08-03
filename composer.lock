@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "67ba8a072d6f951eb0505b9bc74d8fe7",
-    "content-hash": "02819b8c33e8bd665fa46a5fffd64e65",
+    "hash": "a516d73a68e5103cb41464fe8d139dce",
+    "content-hash": "08f854e5746b2bbe0c466b948102bf08",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -288,6 +288,50 @@
                 "random"
             ],
             "time": "2017-03-13 16:27:32"
+        },
+        {
+            "name": "php-gcm/php-gcm",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lkorth/php-gcm.git",
+                "reference": "fdd57ec3f79fd5a7f0936d695a977c27b22ea67a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lkorth/php-gcm/zipball/fdd57ec3f79fd5a7f0936d695a977c27b22ea67a",
+                "reference": "fdd57ec3f79fd5a7f0936d695a977c27b22ea67a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHP_GCM": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Luke Korth",
+                    "email": "luke@lukekorth.com"
+                }
+            ],
+            "description": "A PHP library for sending GCM messages",
+            "homepage": "https://github.com/lkorth/php-gcm",
+            "keywords": [
+                "android",
+                "gcm",
+                "library",
+                "php"
+            ],
+            "time": "2015-05-06 13:25:45"
         },
         {
             "name": "professionalweb/pushok",

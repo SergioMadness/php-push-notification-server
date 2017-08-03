@@ -1,6 +1,8 @@
 <?php namespace professionalweb;
 
+use professionalweb\contracts\Platform;
 use professionalweb\services\IOSPusher;
+use professionalweb\services\AndroidPusher;
 use professionalweb\contracts\PusherFactory;
 use professionalweb\contracts\PushNotification;
 
@@ -21,11 +23,12 @@ class PushNotificationFactory implements PusherFactory
     public function create(string $name) : PushNotification
     {
         switch ($name) {
-            case PusherFactory::PLATFORN_ANDROID: {
-//                $pusher = new
+            case Platform::ANDROID: {
+                $pusher = new AndroidPusher();
+                return $pusher;
                 break;
             }
-            case PusherFactory::PLATFORM_IOS: {
+            case Platform::IOS: {
                 $pusher = new IOSPusher();
                 return $pusher;
             }

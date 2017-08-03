@@ -16,9 +16,9 @@ interface PushNotificationResponse
     /**
      * Get status code.
      *
-     * @return int
+     * @return string
      */
-    public function getStatusCode(): int;
+    public function getStatusCode(): string;
 
     /**
      * Get message

@@ -14,6 +14,7 @@ ob_implicit_flush();
 
 $validator = new \professionalweb\services\RequestService();
 $signer = new \professionalweb\services\JWTResponseSigner();
+$pushServiceFactory = new \professionalweb\PushNotificationFactory();
 
 //$address = \professionalweb\Config::get('ip');
 $port = \professionalweb\Config::get('port');
@@ -81,8 +82,7 @@ do {
                 break;
             }
             print_r($decodedMessage);
-            $pushService = new \professionalweb\services\IOSPusher();
-            $response = $signer->sign($pushService->push($decodedMessage['tokens'], $decodedMessage['bundleId'], $decodedMessage['message'], $decodedMessage['title']??'', $decodedMessage['sound']??'', (array)$decodedMessage['extraParams']));
+            $response = $signer->sign($pushServiceFactory->create($decodedMessage['platform'])->push($decodedMessage['tokens'], $decodedMessage['bundleId'], $decodedMessage['message'], $decodedMessage['title']??'', $decodedMessage['sound']??'', (array)$decodedMessage['extraParams']));
             echo 'Response: ' . $response . "\n";
             socket_write($msgsock, $response, strlen($response));
             echo "Response sended";

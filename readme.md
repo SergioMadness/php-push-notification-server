@@ -1,6 +1,6 @@
 # Push sender
 
-#Connection through sockets
+# Connection through sockets
 
 ## config.json
 ```javascript
@@ -34,7 +34,7 @@
 ], $this->getJwtKey());
 ```
 
-##response
+## response
 ```javascript
 [
    {
