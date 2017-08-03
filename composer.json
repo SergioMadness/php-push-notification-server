@@ -1,0 +1,54 @@
+{
+  "name": "prefessionalweb/push",
+  "description": "PUSH-notification server",
+  "keywords": [
+    "prefessionalweb",
+    "push",
+    "notification",
+    "service"
+  ],
+  "license": "proprietary",
+  "type": "project",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Sergey Zinchenko",
+      "email": "s.zinchenko@web-development.pw",
+      "role": "Architect"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/SergioMadness/pushok.git"
+    }
+  ],
+  "require": {
+    "professionalweb/pushok": "dev-master",
+    "firebase/php-jwt": "~2.0",
+    "rhumsaa/uuid": "*",
+    "php-gcm/php-gcm": "^1.1.1"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "prefessionalweb\\": "app/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+    ]
+  },
+  "scripts": {
+    "post-install-cmd": [
+    ],
+    "post-update-cmd": [
+    ],
+    "post-create-project-cmd": [
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
+}
