@@ -9,21 +9,21 @@ class PushResponse implements PushNotificationResponse, \JsonSerializable
      *
      * @var string
      */
-    private $token;
+    private $token = '';
 
     /**
-     * Starus code
+     * Status code
      *
-     * @var int
+     * @var string
      */
-    private $statusCode;
+    private $statusCode = '';
 
     /**
      * Response message
      *
      * @var string
      */
-    private $message;
+    private $message = '';
 
     /**
      * Set token
@@ -50,10 +50,10 @@ class PushResponse implements PushNotificationResponse, \JsonSerializable
     /**
      * Set status code
      *
-     * @param int $code
+     * @param string $code
      * @return PushResponse
      */
-    public function setStatusCode(int $code): PushResponse
+    public function setStatusCode(string $code): PushResponse
     {
         $this->statusCode = $code;
         return $this;
@@ -62,9 +62,9 @@ class PushResponse implements PushNotificationResponse, \JsonSerializable
     /**
      * Get status code.
      *
-     * @return int|null
+     * @return string
      */
-    public function getStatusCode(): int
+    public function getStatusCode(): string
     {
         return $this->statusCode;
     }

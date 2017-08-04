@@ -6,15 +6,6 @@
  */
 interface PusherFactory
 {
-    /**
-     * Android
-     */
-    const PLATFORN_ANDROID = 'android';
-
-    /**
-     * iOS
-     */
-    const PLATFORM_IOS = 'iOS';
 
     /**
      * @param string $name

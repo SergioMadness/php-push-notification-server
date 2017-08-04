@@ -1,4 +1,5 @@
 FROM debian:jessie
+MAINTAINER professionalweb
 
 # using wget for fetching the files to avoid setting up an older version of curl for this
 
@@ -105,6 +106,8 @@ RUN php -r "unlink('composer-setup.php');"
 
 COPY ./ /usr/src/pusher
 WORKDIR /usr/src/pusher
+
+VOLUME ["/usr/src/pusher/certificates"]
 
 RUN composer install --no-dev
 

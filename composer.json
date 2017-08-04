@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "prefessionalweb\\": "app/"
+      "professionalweb\\": "app/"
     }
   },
   "autoload-dev": {
