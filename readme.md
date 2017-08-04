@@ -21,6 +21,10 @@
     "all": {
       "apiKey": "AIzJdurHh377f7O95u-OAS_KKdfhh57878L4QcQ",
       "retries": 0
+    },
+    "byPattern": {
+      "apiKey": "AJSGHdshjd8Hhhjf7O95u-OAS_KKdfhh57878L4QcQ",
+      "retries": 10
     }
   },
   "map": {
@@ -28,7 +32,8 @@
       "*": "corp"
     },
     "gcm": {
-      "*": "all"
+      "*": "all",
+      "*pattern*": "byPattern"
     }
   }
 }
