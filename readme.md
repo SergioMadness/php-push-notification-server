@@ -7,13 +7,29 @@
 {
   "ip": "",
   "port": 10000,
-  "jwtToken": "some token",
+  "jwtToken": "kjdsfhjk849678946",
   "apns": {
-    "key": "app/certificates/AuthKey_jf774hh.p8",
-    "keyPassword": "",
-    "keyId": "jf774hh",
-    "teamId": "TEAMID",
-    "production": false
+    "all": {
+      "key": "certificates/AuthKey_FHH747JJD.p8",
+      "keyPassword": "",
+      "keyId": "FHH747JJD",
+      "teamId": "SERTYUJJ",
+      "production": false
+    }
+  },
+  "gcm": {
+    "all": {
+      "apiKey": "AIzJdurHh377f7O95u-OAS_KKdfhh57878L4QcQ",
+      "retries": 0
+    }
+  },
+  "map": {
+    "apns": {
+      "*": "corp"
+    },
+    "gcm": {
+      "*": "all"
+    }
   }
 }
 ```

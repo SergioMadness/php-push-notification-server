@@ -41,11 +41,39 @@ class AndroidPusher implements PushNotification
         $sender = new Sender($gcmConfig['apiKey']);
         $message = new Message('', $payload);
 
+        try {
+            $sendResults = $sender->sendMulti($message, $tokenList, $gcmConfig['retries']??0)->getResults();
+        } catch (\Exception $ex) {
+            return $this->prepareAllTokenError($tokenList, (string)$ex->getCode(), $ex->getMessage());
+        }
+
         /** @var Result $pushResult */
-        foreach ($sender->sendMulti($message, $tokenList, $gcmConfig['retries']??0)->getResults() as $pushResult) {
+        foreach ($sendResults as $pushResult) {
             $result[] = (new PushResponse())
                 ->setToken($pushResult->getCanonicalRegistrationId())
                 ->setStatusCode($pushResult->getErrorCode());
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get result list with tokens and error message
+     *
+     * @param array $tokenList
+     * @param string $code
+     * @param string $errorMessage
+     * @return array
+     */
+    protected function prepareAllTokenError(array $tokenList, string $code, string $errorMessage) : array
+    {
+        $result = [];
+
+        foreach ($tokenList as $token) {
+            $result[] = (new PushResponse())
+                ->setToken($token)
+                ->setStatusCode($code)
+                ->setMessage($errorMessage);
         }
 
         return $result;

@@ -14,5 +14,5 @@ interface Platform
     /**
      * iOS
      */
-    const IOS = 'iOS';
+    const IOS = 'ios';
 }
