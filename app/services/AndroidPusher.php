@@ -35,7 +35,7 @@ class AndroidPusher implements PushNotification
 
         $payload = array_merge($extraParams, [
             'title' => $title,
-            'body' => $message
+            'text' => $message
         ]);
 
         $sender = new Sender($gcmConfig['apiKey']);
