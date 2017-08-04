@@ -9,21 +9,21 @@ class PushResponse implements PushNotificationResponse, \JsonSerializable
      *
      * @var string
      */
-    private $token;
+    private $token = '';
 
     /**
      * Status code
      *
      * @var string
      */
-    private $statusCode;
+    private $statusCode = '';
 
     /**
      * Response message
      *
      * @var string
      */
-    private $message;
+    private $message = '';
 
     /**
      * Set token

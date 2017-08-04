@@ -48,9 +48,9 @@ class AndroidPusher implements PushNotification
         }
 
         /** @var Result $pushResult */
-        foreach ($sendResults as $pushResult) {
+        foreach ($sendResults as $index => $pushResult) {
             $result[] = (new PushResponse())
-                ->setToken($pushResult->getCanonicalRegistrationId())
+                ->setToken($tokenList[$index])
                 ->setStatusCode($pushResult->getErrorCode());
         }
 
