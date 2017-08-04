@@ -55,9 +55,29 @@ class Config
     {
         $platforms = [Platform::IOS => 'apns', Platform::ANDROID => 'gcm'];
         $map = static::get('map');
-        if (in_array($platform, array_keys($platforms)) && ($configId = isset($map[$platforms[$platform]][$bundleId]) ? $map[$platforms[$platform]][$bundleId] : (isset($map[$platforms[$platform]]['*']) ? $map[$platforms[$platform]]['*'] : null)) !== null) {
-            return static::get($platforms[$platform])[$configId];
+        if (in_array($platform, array_keys($platforms)) && ($configId = static::getByPattern(array_keys($map[$platforms[$platform]]), $bundleId)) !== '') {
+            return static::get($platforms[$platform])[$map[$platforms[$platform]][$configId]];
         }
         return [];
+    }
+
+    /**
+     * Search string by pattern
+     *
+     * @param array $patternsArray
+     * @param string $str
+     * @return string
+     */
+    protected static function getByPattern(array $patternsArray, string $str) : string
+    {
+        foreach ($patternsArray as $pattern) {
+            if ($pattern != '*' && fnmatch($pattern, $str)) {
+                return $pattern;
+            }
+        }
+        if (in_array('*', $patternsArray)) {
+            return '*';
+        }
+        return '';
     }
 }
