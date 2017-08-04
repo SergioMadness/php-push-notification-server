@@ -51,7 +51,7 @@ class AndroidPusher implements PushNotification
         foreach ($sendResults as $index => $pushResult) {
             $result[] = (new PushResponse())
                 ->setToken($tokenList[$index])
-                ->setStatusCode($pushResult->getErrorCode());
+                ->setStatusCode((string)$pushResult->getErrorCode());
         }
 
         return $result;
