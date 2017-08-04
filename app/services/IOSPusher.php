@@ -2,7 +2,6 @@
 
 use Pushok\Client;
 use Pushok\Payload;
-use Rhumsaa\Uuid\Uuid;
 use Pushok\Notification;
 use Pushok\Payload\Alert;
 use professionalweb\Config;
@@ -11,6 +10,7 @@ use Pushok\ApnsResponseInterface;
 use Pushok\AuthProviderInterface;
 use professionalweb\contracts\Platform;
 use professionalweb\models\PushResponse;
+use professionalweb\helpers\StringHelper;
 use professionalweb\contracts\PushNotification;
 
 /**
@@ -55,7 +55,7 @@ class IOSPusher implements PushNotification
         $notifications = [];
         $tokenUIDMap = [];
         foreach ($tokenList as $deviceToken) {
-            $id = Uuid::uuid4()->toString();
+            $id = StringHelper::genUuid();
             $tokenUIDMap[$id] = $deviceToken;
             $notifications[] = (new Notification($payload, $deviceToken))->setId($id);
         }
