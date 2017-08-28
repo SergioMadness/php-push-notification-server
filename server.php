@@ -1,6 +1,18 @@
 #!/usr/local/bin/php -q
 <?php
 
+/**
+ * Check dependencies
+ */
+if (!extension_loaded('sockets')) {
+    syslog(LOG_CRIT, 'This example requires sockets extension (http://www.php.net/manual/en/sockets.installation.php)');
+    exit(-1);
+}
+if (!extension_loaded('pcntl')) {
+    syslog(LOG_CRIT, 'This example requires PCNTL extension (http://www.php.net/manual/en/pcntl.installation.php)');
+    exit(-1);
+}
+
 require_once 'vendor/autoload.php';
 
 error_reporting(E_ALL);
@@ -59,7 +71,17 @@ do {
         syslog(LOG_CRIT, "Не удалось выполнить socket_accept(): причина: " . socket_strerror(socket_last_error($sock)));
         break;
     }
+
     echo "Accept\n";
+
+    $pid = pcntl_fork();
+
+    if ($pid == -1) {
+        $errorMessage = 'Не удалось выполнить pcntl_fork(): причина: ' . pcntl_get_last_error() . "\n";
+        syslog(LOG_CRIT, $errorMessage);
+    } elseif ($pid) {
+        continue;
+    }
 
     try {
         do {
