@@ -119,6 +119,8 @@ do {
             $response = $signer->sign($pushServiceFactory->create((string)$decodedMessage['platform'])->push($decodedMessage['tokens'], $decodedMessage['bundleId'], $decodedMessage['message'], $decodedMessage['title']??'', $decodedMessage['sound']??'', (array)$decodedMessage['extraParams']));
             echo 'Response: ' . $response . "\n";
             socket_write($msgsock, $response, strlen($response));
+            $message = "\n";
+            socket_write($msgsock, $message, strlen($message));
             echo "Response sended";
         } while (true);
     } catch (Throwable $ex) {
