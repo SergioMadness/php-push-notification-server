@@ -33,6 +33,7 @@ function socket_read_all($sock)
         }
         $result .= $buf;
     }
+
     return $result;
 }
 
@@ -117,10 +118,9 @@ do {
             }
             print_r($decodedMessage);
             $response = $signer->sign($pushServiceFactory->create((string)$decodedMessage['platform'])->push($decodedMessage['tokens'], $decodedMessage['bundleId'], $decodedMessage['message'], $decodedMessage['title']??'', $decodedMessage['sound']??'', (array)$decodedMessage['extraParams']));
-            echo 'Response: ' . $response . "\n";
+            $response .= "\n";
+            echo 'Response: ' . $response;
             socket_write($msgsock, $response, strlen($response));
-            $message = "\n";
-            socket_write($msgsock, $message, strlen($message));
             echo "Response sended";
         } while (true);
     } catch (Throwable $ex) {
