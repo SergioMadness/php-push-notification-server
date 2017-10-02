@@ -28,10 +28,10 @@ function socket_read_all($sock)
 {
     $result = '';
     while ($buf = @socket_read($sock, 1024)) {
-        if (trim($buf) == "") {
+        $result .= $buf;
+        if (trim($buf) == "" || substr($buf, -1) == "\n") {
             break;
         }
-        $result .= $buf;
     }
 
     return $result;
